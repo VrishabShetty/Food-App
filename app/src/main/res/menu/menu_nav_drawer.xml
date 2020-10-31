@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view"
+    android:background="#ffe3bb"
+    android:theme="@style/AppTheme">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="Home"/>
+        <item android:id="@+id/nav_search_bar"
+            android:icon="@drawable/ic_search"
+            android:title="Search"/>
+
+        <item android:id="@+id/nav_compare"
+            android:icon="@drawable/ic_compare"
+            android:title="Compare"/>
+    </group>
+    
+</menu>
