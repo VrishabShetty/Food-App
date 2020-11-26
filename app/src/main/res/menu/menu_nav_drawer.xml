@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view"
     android:background="#ffe3bb"
+    android:fontFamily="@font/akronim"
     android:theme="@style/AppTheme">
 
     <group android:checkableBehavior="single">
