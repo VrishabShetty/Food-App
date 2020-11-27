@@ -1,8 +1,5 @@
 package com.example.project;
 
-import android.media.Image;
-import android.widget.ImageView;
-
 import java.util.UUID;
 
 public class Food {
@@ -13,7 +10,15 @@ public class Food {
     private float price;
     private float rating;
     private UUID id;
-    private boolean isInCart;
+    private boolean isInCart,isGood;
+
+    public boolean isGood() {
+        return isGood;
+    }
+
+    public void setGood(boolean good) {
+        isGood = good;
+    }
 
     public boolean isInCart() {
         return isInCart;

@@ -16,9 +16,10 @@ public class Foods {
 
         for(int i=1; i<=100; i++) {
             Food food = new Food();
-            if(i==1) {food.setImage(R.drawable.pizza);}
-            if(i==10){food.setImage(R.drawable.pizza1);}
             food.setInCart(false);
+            food.setGood(false);
+            if(i==1) {food.setImage(R.drawable.pizza);}
+            if(i==10){food.setGood(true);}
             food.setName("Food "+i);
             food.setDes("Food "+i);
             mFoods.add(food);

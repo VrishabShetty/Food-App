@@ -11,6 +11,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".FoodActivity"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity">
         </activity>
 

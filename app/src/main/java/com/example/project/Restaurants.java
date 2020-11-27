@@ -1,6 +1,5 @@
 package com.example.project;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;

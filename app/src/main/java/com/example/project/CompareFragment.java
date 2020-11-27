@@ -6,15 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class CompareFragment extends Fragment {
     private RecyclerView mRecyclerView;
@@ -28,7 +26,6 @@ public class CompareFragment extends Fragment {
         mRecyclerView = view.findViewById(R.id.list_compare);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-
         updateUI();
 
         return view;
@@ -38,12 +35,14 @@ public class CompareFragment extends Fragment {
 
         private TextView mNameFood;
         private ImageButton delete;
+        private ImageView good;
         private Food mFood;
 
         public CartHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_cart,parent,false));
             mNameFood = itemView.findViewById(R.id.cart_food);
             delete = itemView.findViewById(R.id.delete);
+            good = itemView.findViewById(R.id.recommended);
         }
 
         public void bind (Food food) {
@@ -67,11 +66,9 @@ public class CompareFragment extends Fragment {
     }
     private class CartAdapter extends RecyclerView.Adapter<CartHolder> {
         private List<Food> mFoods;
-        private List<Food> mFoodsFull;
 
         public CartAdapter(List<Food> foods) {
             mFoods = foods;
-            mFoodsFull = new ArrayList<>(foods);
         }
 
         @Override
@@ -97,6 +94,7 @@ public class CompareFragment extends Fragment {
 
         if(mAdapter == null) {
             foods = Foods.get().getCart();
+            if(foods == null) { foods = new ArrayList<>(); }
             mAdapter = new CartAdapter(foods);
             mRecyclerView.setAdapter(mAdapter);
         }
