@@ -17,6 +17,7 @@ public class Restaurants {
         for(int i=1; i<=20; i++)
         {
             Restaurant r = new Restaurant();
+            if(i==1) {r.setUrl("http://www.google.com");}
             r.setName("Restaurant "+i);
             mRestaurants.add(r);
         }

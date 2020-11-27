@@ -1,5 +1,7 @@
 package com.example.project;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,9 +29,10 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    private class RestaurantHolder extends RecyclerView.ViewHolder
+    private class RestaurantHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         private TextView name;
+        private Restaurant mRestaurant;
         public RestaurantHolder(LayoutInflater inflater,ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_restaurant,parent,false));
 
@@ -37,8 +40,20 @@ public class HomeFragment extends Fragment {
         }
 
         public void bind (Restaurant restaurant) {
+            mRestaurant = restaurant;
             name.setText(restaurant.getName());
         }
+        @Override
+        public void onClick(View v) {
+            if(mRestaurant.getUrl() != null) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse(mRestaurant.getUrl()));
+                startActivity(intent);
+            }
+        }
+
     }
 
     private class RestaurantAdapter extends RecyclerView.Adapter<RestaurantHolder>
@@ -59,8 +74,8 @@ public class HomeFragment extends Fragment {
         @Override
         public void onBindViewHolder(RestaurantHolder holder, int position) {
             holder.bind(mRestaurants.get(position));
+            holder.itemView.setOnClickListener(holder);
             MyAnimator.animation(getActivity(),holder.itemView,200);
-
         }
 
         @Override

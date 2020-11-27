@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public class Restaurant {
 
-    private URL url;
+    private String url;
     private String name;
     private UUID id;
 
@@ -21,11 +21,11 @@ public class Restaurant {
         return name;
     }
 
-    public URL getUrl() {
+    public String getUrl() {
         return url;
     }
 
-    public void setUrl(URL url) {
+    public void setUrl(String url) {
         this.url = url;
     }
 
