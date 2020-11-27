@@ -41,11 +41,14 @@ public class FoodActivity extends AppCompatActivity {
             getImageCornerRounded(image,mFood.getImage());
 
         text.setText(mFood.getDes());
-
+        button.setEnabled(!mFood.isInCart());
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(FoodActivity.this,"Your item is added to compare",Toast.LENGTH_SHORT).show();
+                mFood.setInCart(true);
+                Foods.get().add(mFood);
+                button.setEnabled(false);
             }
         });
     }

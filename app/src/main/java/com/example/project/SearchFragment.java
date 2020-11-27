@@ -12,6 +12,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.SearchView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -36,7 +37,7 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_search,container,false);
+        View view = inflater.inflate(R.layout.fragment_search, container, false);
         mRecyclerView = view.findViewById(R.id.list_food);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -47,7 +48,7 @@ public class SearchFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_search,menu);
+        inflater.inflate(R.menu.menu_search, menu);
 
         MenuItem search = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) search.getActionView();
@@ -67,18 +68,18 @@ public class SearchFragment extends Fragment {
         });
     }
 
-    private class FoodHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    private class FoodHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView mNameFood;
         private Food mFood;
 
-        public FoodHolder(LayoutInflater inflater,ViewGroup parent) {
-            super(inflater.inflate(R.layout.list_item_food,parent,false));
+        public FoodHolder(LayoutInflater inflater, ViewGroup parent) {
+            super(inflater.inflate(R.layout.list_item_food, parent, false));
 
             mNameFood = itemView.findViewById(R.id.name_food);
         }
 
-        public void bind (Food food) {
+        public void bind(Food food) {
             mFood = food;
             mNameFood.setText(food.getName());
 
@@ -86,7 +87,7 @@ public class SearchFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            Intent intent = FoodActivity.newIntent(getActivity(),mFood.getId());
+            Intent intent = FoodActivity.newIntent(getActivity(), mFood.getId());
             startActivity(intent);
         }
     }
@@ -103,14 +104,14 @@ public class SearchFragment extends Fragment {
         @Override
         public FoodHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater inflater = LayoutInflater.from(getActivity());
-            return new FoodHolder(inflater,parent);
+            return new FoodHolder(inflater, parent);
         }
 
         @Override
         public void onBindViewHolder(FoodHolder holder, int position) {
             holder.bind(mFoods.get(position));
             holder.itemView.setOnClickListener(holder);
-            MyAnimator.animation(getActivity(),holder.itemView,200);
+            MyAnimator.animation(getActivity(), holder.itemView, 200);
         }
 
         @Override
@@ -129,15 +130,12 @@ public class SearchFragment extends Fragment {
             protected FilterResults performFiltering(CharSequence constraint) {
                 List<Food> FilteredList = new ArrayList<>();
 
-                if(constraint == null || constraint.length() == 0) {
+                if (constraint == null || constraint.length() == 0) {
                     FilteredList.addAll(mFoodsFull);
-                }
-                else {
-                    for(Food f : mFoodsFull)
-                    {
+                } else {
+                    for (Food f : mFoodsFull) {
                         String search = constraint.toString().toLowerCase().trim();
-                        if(f.getName().toLowerCase().contains(search))
-                        {
+                        if (f.getName().toLowerCase().contains(search)) {
                             FilteredList.add(f);
                         }
                     }
@@ -151,7 +149,7 @@ public class SearchFragment extends Fragment {
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
                 mFoods.clear();
-                mFoods.addAll((List)results.values);
+                mFoods.addAll((List) results.values);
                 notifyDataSetChanged();
             }
         };
@@ -160,7 +158,7 @@ public class SearchFragment extends Fragment {
 
     private void updateUI() {
 
-        if(mAdapter == null) {
+        if (mAdapter == null) {
 
             Foods f = Foods.get();
             List<Food> foods = f.getFoods();

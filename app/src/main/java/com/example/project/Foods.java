@@ -8,6 +8,7 @@ public class Foods {
 
     private static Foods sFoods;
     private List<Food> mFoods;
+    private List<Food>Cart;
 
     private Foods() {
 
@@ -17,6 +18,7 @@ public class Foods {
             Food food = new Food();
             if(i==1) {food.setImage(R.drawable.pizza);}
             if(i==10){food.setImage(R.drawable.pizza1);}
+            food.setInCart(false);
             food.setName("Food "+i);
             food.setDes("Food "+i);
             mFoods.add(food);
@@ -36,6 +38,14 @@ public class Foods {
     public List<Food> getFoods() {
         return mFoods;
     }
+
+    public void add (Food food){
+        if(Cart == null) Cart = new ArrayList<>();
+
+        Cart.add(food);
+    }
+
+    public List<Food> getCart() { return Cart; }
 
     public static Foods get() {
         if(sFoods == null) {

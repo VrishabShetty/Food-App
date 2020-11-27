@@ -13,6 +13,15 @@ public class Food {
     private float price;
     private float rating;
     private UUID id;
+    private boolean isInCart;
+
+    public boolean isInCart() {
+        return isInCart;
+    }
+
+    public void setInCart(boolean inCart) {
+        isInCart = inCart;
+    }
 
     public Food() {
         id = UUID.randomUUID();
