@@ -14,16 +14,39 @@ public class Foods {
 
         mFoods = new ArrayList<>();
 
-        for(int i=1; i<=100; i++) {
+
             Food food = new Food();
             food.setInCart(false);
             food.setGood(false);
-            if(i==1) {food.setImage(R.drawable.pizza);}
-            if(i==10){food.setGood(true);}
-            food.setName("Food "+i);
-            food.setDes("Food "+i);
+            food.setImage(R.drawable.pizza);
+            food.setName("Pizza");
+            food.setDes("Food is Good");
+            // Setting Price and rating
+            food.setPrice(400.00f);
+            food.setRating(2.0f);
+            //
             mFoods.add(food);
-        }
+
+
+            food = new Food();
+            food.setInCart(false);
+            food.setGood(false);
+            food.setImage(R.drawable.pizza);
+            food.setName("Pizza1");
+            food.setDes("Food is Good");
+            food.setPrice(800.00f);
+            food.setRating(4.0f);
+            mFoods.add(food);
+
+            food = new Food();
+            food.setInCart(false);
+            food.setGood(false);
+            food.setImage(R.drawable.pizza1);
+            food.setName("Pizza2");
+            food.setDes("Food is Good");
+            food.setPrice(600.00f);
+            food.setRating(3.0f);
+            mFoods.add(food);
 
     }
 

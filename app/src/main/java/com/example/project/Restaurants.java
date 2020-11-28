@@ -13,13 +13,17 @@ public class Restaurants {
     {
         mRestaurants = new ArrayList<>();
 
-        for(int i=1; i<=20; i++)
-        {
+
             Restaurant r = new Restaurant();
-            if(i==1) {r.setUrl("http://www.google.com");}
-            r.setName("Restaurant "+i);
+            r.setUrl("http://www.google.com");
+            r.setName("Pizza Hut");
             mRestaurants.add(r);
-        }
+
+            r = new Restaurant();
+            r.setUrl("http://www.google.com");
+            r.setName("Pizza Hut");
+            mRestaurants.add(r);
+
     }
 
     public static Restaurants get()

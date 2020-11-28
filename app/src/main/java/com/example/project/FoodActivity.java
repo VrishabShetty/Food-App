@@ -35,16 +35,28 @@ public class FoodActivity extends AppCompatActivity {
 
         ImageView image = findViewById(R.id.image_food);
         TextView text = findViewById(R.id.text_food);
+        TextView price = findViewById(R.id.price);
+        TextView name = findViewById(R.id.food_name);
         Button button = findViewById(R.id.add);
 
-        if(mFood.getImage() != null)
+        if (mFood.getImage() != null)
             getImageCornerRounded(image,mFood.getImage());
 
-        text.setText(mFood.getDes());
+        if (mFood.getName() != null)
+            name.setText(mFood.getName());
+
+        if (mFood.getPrice() != 0.0) {
+            String s = ("Rs " +mFood.getPrice());
+            price.setText(s);
+        }
+
+        if (mFood.getDes() != null)
+            text.setText(mFood.getDes());
+
         button.setEnabled(!mFood.isInCart());
         button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick (View v) {
                 Toast.makeText(FoodActivity.this,"Your item is added to compare",Toast.LENGTH_SHORT).show();
                 mFood.setInCart(true);
                 Foods.get().add(mFood);

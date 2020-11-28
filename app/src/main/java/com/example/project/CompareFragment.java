@@ -35,6 +35,7 @@ public class CompareFragment extends Fragment {
 
         private TextView mNameFood;
         private ImageButton delete;
+        private TextView price;
         private ImageView good;
         private Food mFood;
 
@@ -43,19 +44,26 @@ public class CompareFragment extends Fragment {
             mNameFood = itemView.findViewById(R.id.cart_food);
             delete = itemView.findViewById(R.id.delete);
             good = itemView.findViewById(R.id.recommended);
+            price = itemView.findViewById(R.id.price);
         }
 
         public void bind (Food food) {
             mFood = food;
             mNameFood.setText(food.getName());
+            String s = "Rs "+food.getPrice();
+            price.setText(s);
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     food.setInCart(false);
+                    food.setGood(false);
                     foods.remove(food);
+                    compare();
                     mAdapter.notifyDataSetChanged();
                 }
             });
+
+            if(food.isGood()) good.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -94,9 +102,30 @@ public class CompareFragment extends Fragment {
 
         if(mAdapter == null) {
             foods = Foods.get().getCart();
+            compare();
             if(foods == null) { foods = new ArrayList<>(); }
             mAdapter = new CartAdapter(foods);
             mRecyclerView.setAdapter(mAdapter);
         }
+    }
+    
+    private void compare(){
+        
+        if(foods.size() == 0) return;
+            
+        Food best = null;
+        
+        for(Food f:foods) {
+            if(best ==  null) {best = f; continue;}
+
+            float price=f.getPrice(),rating=f.getRating();
+
+            if (price-best.getPrice()<0 && rating-f.getRating()>0) best = f;
+            else if(rating/4 > 0 && best.getRating()/4 < 0) best = f;
+            else if (rating-best.getRating()>=1 && price-best.getPrice()<150) best = f;
+
+        }
+            
+        best.setGood(true);
     }
 }

@@ -46,6 +46,7 @@
             android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/leckerli_one"
             android:text="Rs.490"
             app:layout_constraintStart_toStartOf="@+id/food_name"
             app:layout_constraintTop_toBottomOf="@+id/food_name" />
