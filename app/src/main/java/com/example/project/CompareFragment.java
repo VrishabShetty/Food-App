@@ -102,8 +102,8 @@ public class CompareFragment extends Fragment {
 
         if(mAdapter == null) {
             foods = Foods.get().getCart();
-            compare();
             if(foods == null) { foods = new ArrayList<>(); }
+            compare();
             mAdapter = new CartAdapter(foods);
             mRecyclerView.setAdapter(mAdapter);
         }
