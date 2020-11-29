@@ -14,7 +14,7 @@ public class Restaurants {
     {
         mRestaurants = new ArrayList<>();
 
-       Restaurant r = new Restaurant();
+         Restaurant r = new Restaurant();
         r.setUrl("https://www.pizzahut.co.in/order/pizzas/");
         r.setName("Pizza Hut");
         mRestaurants.add(r);
@@ -73,6 +73,9 @@ public class Restaurants {
         r.setUrl("https://www.burgerking.in/");
         r.setName("Burger King");
         mRestaurants.add(r);
+
+
+
 
 
 
