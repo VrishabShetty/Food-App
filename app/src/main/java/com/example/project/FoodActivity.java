@@ -40,7 +40,7 @@ public class FoodActivity extends AppCompatActivity {
         Button button = findViewById(R.id.add);
 
         if (mFood.getImage() != null)
-            getImageCornerRounded(image,mFood.getImage());
+            image.setImageResource(mFood.getImage());
 
         if (mFood.getName() != null)
             name.setText(mFood.getName());
@@ -72,16 +72,16 @@ public class FoodActivity extends AppCompatActivity {
         return intent;
     }
 
-    private void getImageCornerRounded(ImageView mImageView,Integer image) {
-        mImageView.setImageResource(image);
-        Bitmap mBitmap=((BitmapDrawable) getResources().getDrawable(image)).getBitmap();
-        Bitmap imageRounded=Bitmap.createBitmap(mBitmap.getWidth(), mBitmap.getHeight(), mBitmap.getConfig());
-        Canvas canvas=new Canvas(imageRounded);
-        Paint mPaint=new Paint();
-        mPaint.setAntiAlias(true);
-        mPaint.setShader(new BitmapShader(mBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
-        canvas.drawRoundRect((new RectF(0, 0, mBitmap.getWidth(), mBitmap.getHeight())), 50, 50, mPaint); // Round Image Corner 100 100 100 100
-        mImageView.setImageBitmap(imageRounded);
-    }
+//    private void getImageCornerRounded(ImageView mImageView,Integer image) {
+//        mImageView.setImageResource(image);
+//        Bitmap mBitmap=((BitmapDrawable) getResources().getDrawable(image)).getBitmap();
+//        Bitmap imageRounded=Bitmap.createBitmap(mBitmap.getWidth(), mBitmap.getHeight(), mBitmap.getConfig());
+//        Canvas canvas=new Canvas(imageRounded);
+//        Paint mPaint=new Paint();
+//        mPaint.setAntiAlias(true);
+//        mPaint.setShader(new BitmapShader(mBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
+//        canvas.drawRoundRect((new RectF(0, 0, mBitmap.getWidth(), mBitmap.getHeight())), 50, 50, mPaint); // Round Image Corner 100 100 100 100
+//        mImageView.setImageBitmap(imageRounded);
+//    }
 
 }

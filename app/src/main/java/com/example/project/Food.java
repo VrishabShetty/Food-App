@@ -5,12 +5,21 @@ import java.util.UUID;
 public class Food {
 
     private String name;
+    private String URL;
     private Integer image;
     private String des;
     private float price;
     private float rating;
     private UUID id;
     private boolean isInCart,isGood;
+
+    public String getURL() {
+        return URL;
+    }
+
+    public void setURL(String URL) {
+        this.URL = URL;
+    }
 
     public boolean isGood() {
         return isGood;

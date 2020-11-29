@@ -10,11 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
-import androidx.appcompat.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,7 +26,9 @@ public class SearchFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private FoodAdapter mAdapter;
-
+    private List<Food> mFoods;
+    private List<Food> mFoodsFull;
+    private List<Food> Filtered;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,22 +52,58 @@ public class SearchFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_search, menu);
 
-        MenuItem search = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) search.getActionView();
-        searchView.setQueryHint("Search...");
+    }
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                mAdapter.getFilter().filter(newText);
-                return false;
-            }
-        });
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                MenuItem search = item;
+                SearchView searchView = (SearchView) search.getActionView();
+                searchView.setQueryHint("Search...");
+
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        mAdapter.getFilter().filter(newText);
+                        return false;
+                    }
+                });
+                return true;
+            case R.id.no_filter:
+                filter(0, 0, true);
+                return true;
+
+            case R.id.below_150:
+                filter(0f, 150f, false);
+                return true;
+
+            case R.id.below_300:
+                filter(150, 300, false);
+                return true;
+
+            case R.id.below_600:
+                filter(300, 600, false);
+                return true;
+
+            case R.id.below_800:
+                filter(600, 800, false);
+                return true;
+
+            case R.id.above_800:
+                filter(800, 1000, false);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 
     private class FoodHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -82,7 +120,6 @@ public class SearchFragment extends Fragment {
         public void bind(Food food) {
             mFood = food;
             mNameFood.setText(food.getName());
-
         }
 
         @Override
@@ -93,12 +130,11 @@ public class SearchFragment extends Fragment {
     }
 
     private class FoodAdapter extends RecyclerView.Adapter<FoodHolder> implements Filterable {
-        private List<Food> mFoods;
-        private List<Food> mFoodsFull;
 
         public FoodAdapter(List<Food> foods) {
             mFoods = foods;
             mFoodsFull = new ArrayList<>(foods);
+            Filtered = new ArrayList<>(foods);
         }
 
         @Override
@@ -131,9 +167,9 @@ public class SearchFragment extends Fragment {
                 List<Food> FilteredList = new ArrayList<>();
 
                 if (constraint == null || constraint.length() == 0) {
-                    FilteredList.addAll(mFoodsFull);
+                    FilteredList.addAll(Filtered);
                 } else {
-                    for (Food f : mFoodsFull) {
+                    for (Food f : Filtered) {
                         String search = constraint.toString().toLowerCase().trim();
                         if (f.getName().toLowerCase().contains(search)) {
                             FilteredList.add(f);
@@ -166,5 +202,23 @@ public class SearchFragment extends Fragment {
             mAdapter = new FoodAdapter(foods);
             mRecyclerView.setAdapter(mAdapter);
         }
+    }
+
+    private void filter(float from, float to, boolean no_filter) {
+
+        Filtered.clear();
+        mFoods.clear();
+        if (no_filter) {
+            mFoods.addAll(mFoodsFull);
+            Filtered.addAll(mFoodsFull);
+        } else {
+
+            for (Food f : mFoodsFull) {
+                if (from <= f.getPrice() && f.getPrice() <= to) Filtered.add(f);
+            }
+            mFoods.addAll(Filtered);
+        }
+
+        mAdapter.notifyDataSetChanged();
     }
 }

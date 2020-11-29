@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginStart="50dp"
-        android:fontFamily="@font/akronim"
+        android:fontFamily="@font/leckerli_one"
         android:paddingTop="15dp"
         android:paddingBottom="25dp"
         android:text="Restaurant"

@@ -5,8 +5,48 @@
     <item
         android:id="@+id/action_search"
         android:icon="@drawable/ic_menu_search"
-        android:title="Search"
-        app:showAsAction="always|collapseActionView"
+        android:title="@string/search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
-        />
+        app:showAsAction="always|collapseActionView" />
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/no_filter"
+            android:orderInCategory="1"
+            android:title="@string/no_filter"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/below_150"
+            android:orderInCategory="2"
+            android:title="@string/below_150"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/below_300"
+            android:orderInCategory="3"
+            android:title="@string/below_300"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/below_600"
+            android:orderInCategory="4"
+            android:title="@string/below_600"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/below_800"
+            android:orderInCategory="5"
+            android:title="@string/below_800"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/above_800"
+            android:orderInCategory="6"
+            android:title="@string/above_800"
+            app:showAsAction="never" />
+
+    </group>
+
 </menu>

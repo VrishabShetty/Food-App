@@ -2,6 +2,7 @@ package com.example.project;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +64,11 @@ public class CompareFragment extends Fragment {
                 }
             });
 
-            if(food.isGood()) good.setVisibility(View.VISIBLE);
+            if(food.isGood()) {
+                good.setVisibility(View.VISIBLE);
+            }
+            else good.setVisibility(View.INVISIBLE);
+
         }
 
         @Override
@@ -103,16 +108,19 @@ public class CompareFragment extends Fragment {
         if(mAdapter == null) {
             foods = Foods.get().getCart();
             if(foods == null) { foods = new ArrayList<>(); }
+
             compare();
             mAdapter = new CartAdapter(foods);
             mRecyclerView.setAdapter(mAdapter);
         }
+
     }
     
     private void compare(){
         
         if(foods.size() == 0) return;
-            
+
+        for(Food f:foods) { f.setGood(false); }
         Food best = null;
         
         for(Food f:foods) {
@@ -120,12 +128,16 @@ public class CompareFragment extends Fragment {
 
             float price=f.getPrice(),rating=f.getRating();
 
-            if (price-best.getPrice()<0 && rating-f.getRating()>0) best = f;
-            else if(rating/4 > 0 && best.getRating()/4 < 0) best = f;
-            else if (rating-best.getRating()>=1 && price-best.getPrice()<150) best = f;
+            if (price-best.getPrice()<=0 && rating-best.getRating()>0) best = f;
+            else if((int)rating/4 > 0)
+                if ((int)best.getRating()/4 < 0 && price-best.getPrice()>=0 && price-best.getPrice()<520) best = f;
+                else if (price-best.getPrice()>=0 && price-best.getPrice()<100) best=f;
+            else if (rating-best.getRating()>=1 &&price-best.getPrice()>=0 && price-best.getPrice()<200) best = f;
 
         }
-            
-        best.setGood(true);
+
+        if(best != null)
+            best.setGood(true);
     }
+
 }

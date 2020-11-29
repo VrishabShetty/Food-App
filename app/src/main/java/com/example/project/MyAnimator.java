@@ -38,15 +38,4 @@ public class MyAnimator
         view.startAnimation(stb);
     }
 
-    public static void getImageCornerRounded(Resources resources, ImageView mImageView) {
-
-        Bitmap mBitmap=((BitmapDrawable) resources.getDrawable(R.drawable.pizza)).getBitmap();
-        Bitmap imageRounded=Bitmap.createBitmap(mBitmap.getWidth(), mBitmap.getHeight(), mBitmap.getConfig());
-        Canvas canvas=new Canvas(imageRounded);
-        Paint mPaint=new Paint();
-        mPaint.setAntiAlias(true);
-        mPaint.setShader(new BitmapShader(mBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
-        canvas.drawRoundRect((new RectF(0, 0, mBitmap.getWidth(), mBitmap.getHeight())), 50, 50, mPaint); // Round Image Corner 100 100 100 100
-        mImageView.setImageBitmap(imageRounded);
-    }
 }
