@@ -11,7 +11,7 @@ public class Food {
     private float price;
     private float rating;
     private UUID id;
-    private boolean isInCart,isGood;
+    private boolean isInCart, isGood;
 
     public String getURL() {
         return URL;
@@ -40,6 +40,7 @@ public class Food {
     public Food() {
         id = UUID.randomUUID();
     }
+
     public UUID getId() {
         return id;
     }

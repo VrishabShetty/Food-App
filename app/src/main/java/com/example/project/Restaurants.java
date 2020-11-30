@@ -6,11 +6,10 @@ import java.util.UUID;
 
 public class Restaurants {
 
-    private  static Restaurants sRestaurants;
+    private static Restaurants sRestaurants;
     private List<Restaurant> mRestaurants;
 
-    private Restaurants()
-    {
+    private Restaurants() {
         mRestaurants = new ArrayList<>();
 
         Restaurant r = new Restaurant();
@@ -19,23 +18,8 @@ public class Restaurants {
         mRestaurants.add(r);
 
         r = new Restaurant();
-        r.setUrl("https://pizzaonline.dominos.co.in/menu");
-        r.setName("Domino's");
-        mRestaurants.add(r);
-
-        r = new Restaurant();
         r.setUrl("https://ribbonsandballoons.com/");
         r.setName("Ribbons & Balloons");
-        mRestaurants.add(r);
-
-        r = new Restaurant();
-        r.setUrl("https://www.tacobell.co.in/");
-        r.setName("Tacobell");
-        mRestaurants.add(r);
-
-        r = new Restaurant();
-        r.setUrl("https://sbarrodelivery.com/");
-        r.setName("Sbarro");
         mRestaurants.add(r);
 
         r = new Restaurant();
@@ -44,8 +28,33 @@ public class Restaurants {
         mRestaurants.add(r);
 
         r = new Restaurant();
+        r.setUrl("https://www.baskinrobbinsindia.com/");
+        r.setName("Baskin Robbins");
+        mRestaurants.add(r);
+
+        r = new Restaurant();
+        r.setUrl("https://pizzaonline.dominos.co.in/menu");
+        r.setName("Domino's");
+        mRestaurants.add(r);
+
+        r = new Restaurant();
+        r.setUrl("https://www.ovenstory.in/");
+        r.setName("Oven story");
+        mRestaurants.add(r);
+
+        r = new Restaurant();
+        r.setUrl("https://sbarrodelivery.com/");
+        r.setName("Sbarro");
+        mRestaurants.add(r);
+
+        r = new Restaurant();
         r.setUrl("https://www.99pancakes.in/");
         r.setName("99 pancakes");
+        mRestaurants.add(r);
+
+        r = new Restaurant();
+        r.setUrl("https://www.tacobell.co.in/");
+        r.setName("Tacobell");
         mRestaurants.add(r);
 
         r = new Restaurant();
@@ -64,31 +73,26 @@ public class Restaurants {
         mRestaurants.add(r);
 
 
-
     }
 
-    public static Restaurants get()
-    {
-        if(sRestaurants == null)
-        {
+    public static Restaurants get() {
+        if (sRestaurants == null) {
             sRestaurants = new Restaurants();
         }
 
         return sRestaurants;
     }
-    public List<Restaurant> getRestaurants()
-    {
+
+    public List<Restaurant> getRestaurants() {
         return mRestaurants;
     }
 
-    public Restaurant getRestaurant(UUID id)
-    {
-            for(Restaurant r : mRestaurants)
-            {
-                if(r.getId().equals(id)) return r;
-            }
+    public Restaurant getRestaurant(UUID id) {
+        for (Restaurant r : mRestaurants) {
+            if (r.getId().equals(id)) return r;
+        }
 
-            return null;
+        return null;
     }
 
 }

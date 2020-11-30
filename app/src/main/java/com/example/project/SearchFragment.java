@@ -29,7 +29,7 @@ public class SearchFragment extends Fragment {
     private List<Food> mFoods;
     private List<Food> mFoodsFull;
     private List<Food> Filtered;
-
+    private List<Food> FilteredList;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +66,7 @@ public class SearchFragment extends Fragment {
                 searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                     @Override
                     public boolean onQueryTextSubmit(String query) {
+                        mAdapter.getFilter().filter(query);
                         return false;
                     }
 
@@ -135,6 +136,8 @@ public class SearchFragment extends Fragment {
             mFoods = foods;
             mFoodsFull = new ArrayList<>(foods);
             Filtered = new ArrayList<>(foods);
+            FilteredList = new ArrayList<>(foods);
+
         }
 
         @Override
@@ -164,12 +167,13 @@ public class SearchFragment extends Fragment {
 
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                List<Food> FilteredList = new ArrayList<>();
+                FilteredList.clear();
 
-                if (constraint == null || constraint.length() == 0) {
-                    FilteredList.addAll(Filtered);
-                } else {
-                    for (Food f : Filtered) {
+                if (constraint == null && constraint.length() == 0) {
+                    FilteredList.addAll(mFoodsFull);
+                }
+                else {
+                    for (Food f : mFoodsFull) {
                         String search = constraint.toString().toLowerCase().trim();
                         if (f.getName().toLowerCase().contains(search)) {
                             FilteredList.add(f);
@@ -184,9 +188,7 @@ public class SearchFragment extends Fragment {
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                mFoods.clear();
-                mFoods.addAll((List) results.values);
-                notifyDataSetChanged();
+                getList();
             }
         };
     }
@@ -207,18 +209,29 @@ public class SearchFragment extends Fragment {
     private void filter(float from, float to, boolean no_filter) {
 
         Filtered.clear();
-        mFoods.clear();
         if (no_filter) {
-            mFoods.addAll(mFoodsFull);
             Filtered.addAll(mFoodsFull);
-        } else {
-
+        }
+        else {
             for (Food f : mFoodsFull) {
                 if (from <= f.getPrice() && f.getPrice() <= to) Filtered.add(f);
             }
-            mFoods.addAll(Filtered);
         }
 
+        getList();
+    }
+    private void getList() {
+
+        List <Food> List = new ArrayList<>();
+        for(Food f : Filtered){
+            for(Food food : FilteredList){
+                if(f.getName().equals(food.getName()))
+                    List.add(f);
+            }
+        }
+
+        mFoods.clear();
+        mFoods.addAll(List);
         mAdapter.notifyDataSetChanged();
     }
 }

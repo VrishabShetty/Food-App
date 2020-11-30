@@ -36,12 +36,12 @@
             android:fontFamily="@font/leckerli_one"
             android:text="The Food is Good "
             android:textSize="25sp"
-            app:layout_constraintEnd_toStartOf="@+id/button"
+            app:layout_constraintEnd_toStartOf="@id/visit"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image" />
+            app:layout_constraintTop_toBottomOf="@id/image" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/visit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"

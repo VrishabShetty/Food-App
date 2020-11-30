@@ -1,6 +1,5 @@
 package com.example.project;
 
-import java.net.URL;
 import java.util.UUID;
 
 public class Restaurant {

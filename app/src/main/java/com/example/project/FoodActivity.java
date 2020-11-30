@@ -2,13 +2,7 @@ package com.example.project;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapShader;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.RectF;
-import android.graphics.Shader;
-import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +30,7 @@ public class FoodActivity extends AppCompatActivity {
         ImageView image = findViewById(R.id.image_food);
         TextView text = findViewById(R.id.text_food);
         TextView price = findViewById(R.id.price);
+        Button visit = findViewById(R.id.visit);
         TextView name = findViewById(R.id.food_name);
         Button button = findViewById(R.id.add);
 
@@ -61,6 +56,17 @@ public class FoodActivity extends AppCompatActivity {
                 mFood.setInCart(true);
                 Foods.get().add(mFood);
                 button.setEnabled(false);
+            }
+        });
+
+        visit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse(mFood.getURL()));
+                startActivity(intent);
             }
         });
     }

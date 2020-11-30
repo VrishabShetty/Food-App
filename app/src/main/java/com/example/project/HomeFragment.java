@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
@@ -22,8 +21,6 @@ import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
-import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
@@ -32,9 +29,9 @@ public class HomeFragment extends Fragment {
     private RestaurantAdapter mAdapter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_home,container,false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
         mRestaurantRecyclerView = view.findViewById(R.id.restaurant_list);
         mRestaurantRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -43,7 +40,7 @@ public class HomeFragment extends Fragment {
 
         CardView cardView = view.findViewById(R.id.card_view);
 
-        MyAnimator.animation(getActivity(),cardView,0);
+        MyAnimator.animation(getActivity(), cardView, 0);
         sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
         sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
         sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
@@ -56,23 +53,24 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    private class RestaurantHolder extends RecyclerView.ViewHolder implements View.OnClickListener
-    {
+    private class RestaurantHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView name;
         private Restaurant mRestaurant;
-        public RestaurantHolder(LayoutInflater inflater,ViewGroup parent) {
-            super(inflater.inflate(R.layout.list_item_restaurant,parent,false));
+
+        public RestaurantHolder(LayoutInflater inflater, ViewGroup parent) {
+            super(inflater.inflate(R.layout.list_item_restaurant, parent, false));
 
             name = itemView.findViewById(R.id.restaurant_name);
         }
 
-        public void bind (Restaurant restaurant) {
+        public void bind(Restaurant restaurant) {
             mRestaurant = restaurant;
             name.setText(restaurant.getName());
         }
+
         @Override
         public void onClick(View v) {
-            if(mRestaurant.getUrl() != null) {
+            if (mRestaurant.getUrl() != null) {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_VIEW);
                 intent.addCategory(Intent.CATEGORY_BROWSABLE);
@@ -83,12 +81,10 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private class RestaurantAdapter extends RecyclerView.Adapter<RestaurantHolder>
-    {
+    private class RestaurantAdapter extends RecyclerView.Adapter<RestaurantHolder> {
         private List<Restaurant> mRestaurants;
 
-        RestaurantAdapter(List<Restaurant> Restaurants)
-        {
+        RestaurantAdapter(List<Restaurant> Restaurants) {
             mRestaurants = Restaurants;
         }
 
@@ -102,7 +98,7 @@ public class HomeFragment extends Fragment {
         public void onBindViewHolder(RestaurantHolder holder, int position) {
             holder.bind(mRestaurants.get(position));
             holder.itemView.setOnClickListener(holder);
-            MyAnimator.animation(getActivity(),holder.itemView,200);
+            MyAnimator.animation(getActivity(), holder.itemView, 200);
         }
 
         @Override
@@ -111,6 +107,7 @@ public class HomeFragment extends Fragment {
         }
 
     }
+
     public class SliderAdapterExample extends
             SliderViewAdapter<SliderAdapterExample.SliderAdapterVH> {
 
@@ -167,10 +164,8 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private void updateUI()
-    {
-        if(mAdapter == null)
-        {
+    private void updateUI() {
+        if (mAdapter == null) {
             Restaurants restaurants = Restaurants.get();
             List<Restaurant> r = restaurants.getRestaurants();
 
